@@ -6,11 +6,11 @@ import { VoicePlayer } from './VoicePlayer';
 import { ImageModal } from './ImageModal';
 import { api } from '../../services/api';
 
-// In production (Railway): VITE_BACKEND_ORIGIN='' → relative paths served by same origin
-// In development: falls back to dynamic localhost:5001
-const BACKEND_ORIGIN = import.meta.env.VITE_BACKEND_ORIGIN !== undefined
-  ? import.meta.env.VITE_BACKEND_ORIGIN
-  : `http://${typeof window !== 'undefined' ? window.location.hostname : 'localhost'}:5001`;
+const _isLocal = typeof window !== 'undefined'
+  ? (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  : true;
+// Local dev: prefix with :5001. Production: relative path (same origin, no prefix needed)
+const BACKEND_ORIGIN = _isLocal ? 'http://localhost:5001' : '';
 
 interface MessageBubbleProps {
   message: Message;

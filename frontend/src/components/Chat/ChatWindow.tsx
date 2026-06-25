@@ -516,7 +516,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({ chatId, chats, setChats,
           )}
           <img 
             src={peerUser.avatar_url
-              ? (peerUser.avatar_url.startsWith('http') ? peerUser.avatar_url : `http://${window.location.hostname}:5001${peerUser.avatar_url}`)
+              ? (peerUser.avatar_url.startsWith('http') ? peerUser.avatar_url : `${window.location.hostname === 'localhost' ? 'http://localhost:5001' : ''}${peerUser.avatar_url}`)
               : 'https://api.dicebear.com/7.x/adventurer/svg?seed=' + peerUser.username} 
             className={styles.peerAvatar} 
             alt={peerUser.username} 

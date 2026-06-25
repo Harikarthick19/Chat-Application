@@ -30,13 +30,12 @@ export const SocketProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       return;
     }
 
-    // In production (Railway): VITE_SOCKET_URL='' → connects to same origin
-    // In development: falls back to dynamic localhost:5001
-    const SOCKET_URL = import.meta.env.VITE_SOCKET_URL !== undefined
-      ? import.meta.env.VITE_SOCKET_URL   // could be '' (same origin) or a full URL
-      : `http://${window.location.hostname}:5001`;
+    const _host = window.location.hostname;
+    const _isLocal = _host === 'localhost' || _host === '127.0.0.1';
+    // Local dev: connect to :5001. Production: connect to same origin (undefined = current page origin)
+    const SOCKET_URL: string | undefined = _isLocal ? 'http://localhost:5001' : undefined;
 
-    const newSocket = io(SOCKET_URL || undefined, {
+    const newSocket = io(SOCKET_URL, {
       auth: { token },
       transports: ['websocket'],
     });

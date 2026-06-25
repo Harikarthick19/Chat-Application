@@ -210,7 +210,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const getAvatarUrl = (url?: string, username?: string) => {
     if (!url) return `https://api.dicebear.com/7.x/adventurer/svg?seed=${username || 'default'}`;
     if (url.startsWith('http')) return url;
-    return `http://${window.location.hostname}:5001${url}`;
+    return `${window.location.hostname === 'localhost' ? 'http://localhost:5001' : ''}${url}`;
   };
 
   const handleSaveProfile = async (e: React.FormEvent) => {
@@ -418,7 +418,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             title="Click to change photo"
           >
             <img 
-              src={avatarUrl ? (avatarUrl.startsWith('http') ? avatarUrl : `http://${window.location.hostname}:5001${avatarUrl}`) : 'https://api.dicebear.com/7.x/adventurer/svg?seed=' + user?.username} 
+              src={avatarUrl ? (avatarUrl.startsWith('http') ? avatarUrl : `${window.location.hostname === 'localhost' ? 'http://localhost:5001' : ''}${avatarUrl}`) : 'https://api.dicebear.com/7.x/adventurer/svg?seed=' + user?.username} 
               alt="Avatar Large" 
               className={styles.largeAvatar}
             />

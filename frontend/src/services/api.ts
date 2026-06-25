@@ -1,7 +1,7 @@
-// In production (Railway): VITE_API_URL=/api  (same-origin, no port needed)
-// In development: falls back to dynamic local backend
-const BASE_URL = import.meta.env.VITE_API_URL ||
-  `http://${typeof window !== 'undefined' ? window.location.hostname : 'localhost'}:5001/api`;
+// Auto-detect: localhost → dev backend on :5001, anything else → same-origin /api (Render/production)
+const _host = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
+const _isLocal = _host === 'localhost' || _host === '127.0.0.1';
+const BASE_URL = _isLocal ? `http://localhost:5001/api` : '/api';
 
 const getHeaders = () => {
   const token = localStorage.getItem('token');
