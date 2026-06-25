@@ -12,6 +12,9 @@ import { errorHandler } from './middlewares/error.middleware';
 
 const app = express();
 
+// Required for Render/Railway/Heroku reverse proxy (fixes express-rate-limit X-Forwarded-For error)
+app.set('trust proxy', 1);
+
 // Security configurations
 app.use(
   helmet({
