@@ -19,13 +19,6 @@ export class AuthService {
   }
 
   static async register(username: string, email: string, password: string, registrationIp?: string) {
-    if (registrationIp) {
-      const count = await UserRepository.countAccountsByIp(registrationIp);
-      if (count >= 2) {
-        throw new Error('Registration limit exceeded. You can only create up to 2 accounts.');
-      }
-    }
-
     // Check if email already exists
     const existingEmail = await UserRepository.findByEmail(email);
     if (existingEmail) {

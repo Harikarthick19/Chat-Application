@@ -22,7 +22,7 @@ export const authenticateJWT = (
   }
 
   try {
-    const secret = process.env.JWT_SECRET || 'fallback_secret';
+    const secret = process.env.JWT_SECRET || 'chat_app_jwt_secret_key_extremely_secure_2026_xyz';
     const decoded = jwt.verify(token, secret) as UserTokenPayload;
     req.user = decoded;
     next();
