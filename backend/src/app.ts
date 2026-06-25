@@ -30,13 +30,14 @@ app.use(
   })
 );
 
-// Rate Limiter for general endpoints
+// Rate Limiter — disable X-Forwarded-For validation (Render sets this header; we handle it via trust proxy)
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 500, // limit each IP to 500 requests per window
+  windowMs: 15 * 60 * 1000,
+  max: 500,
   message: { error: 'Too many requests, please try again later.' },
   standardHeaders: true,
   legacyHeaders: false,
+  validate: { xForwardedForHeader: false }, // prevents crash on Render/Railway proxies
 });
 app.use('/api', limiter);
 
