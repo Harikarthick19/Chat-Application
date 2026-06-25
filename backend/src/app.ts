@@ -73,17 +73,17 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'API is running' });
 });
 
-// In production, serve the React frontend build
-if (process.env.NODE_ENV === 'production') {
-  const frontendDist = path.join(__dirname, '../../frontend/dist');
+// Always serve the React frontend build (production on Render)
+const frontendDist = path.join(__dirname, '../../frontend/dist');
+if (fs.existsSync(frontendDist)) {
   app.use(express.static(frontendDist));
-  // Any non-API route returns the React app (SPA routing)
-  app.get('*', (req, res) => {
+  // Only non-API routes serve index.html (SPA routing)
+  app.get(/^(?!\/api|\/uploads|\/health).*$/, (_req, res) => {
     res.sendFile(path.join(frontendDist, 'index.html'));
   });
 } else {
-  app.get('/', (req, res) => {
-    res.status(200).json({ status: 'API is running' });
+  app.get('/', (_req, res) => {
+    res.status(200).json({ status: 'API is running — frontend not built' });
   });
 }
 
