@@ -1,0 +1,279 @@
+.bubbleWrapper {
+  display: flex;
+  width: 100%;
+  padding: 4px 16px;
+  gap: 10px;
+  margin-bottom: 2px;
+  animation: fadeInUp 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.bubbleWrapperOutgoing {
+  justify-content: flex-end;
+}
+
+.bubbleWrapperIncoming {
+  justify-content: flex-start;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+
+.bubbleCard {
+  max-width: 60%;
+  padding: 10px 14px 6px 14px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  word-break: break-word;
+}
+
+.bubbleCardOutgoing {
+  background-color: var(--primary);
+  color: var(--surface);
+  border-bottom-right-radius: 4px;
+}
+
+.bubbleCardIncoming {
+  background-color: var(--surface);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.imageWrapper {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 2px;
+  max-width: 100%;
+}
+
+.imageContent {
+  width: 100%;
+  max-width: 280px;
+  max-height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: var(--transition-fast);
+}
+
+.imageContent:hover {
+  transform: scale(1.02);
+  filter: brightness(0.95);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  align-self: flex-end;
+  margin-top: 2px;
+}
+
+.metaRowOutgoing {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.metaRowIncoming {
+  color: var(--text-muted);
+}
+
+.timeText {
+  font-family: inherit;
+}
+
+.statusIcon {
+  display: flex;
+  align-items: center;
+}
+
+/* Upload Progress Overlay */
+.uploadOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 12px;
+  gap: 6px;
+}
+
+.progressBarContainer {
+  width: 60%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--accent);
+  transition: width 0.15s ease;
+}
+
+/* Voice audio player wrapper */
+.voiceContent {
+  min-width: 200px;
+}
+
+/* Document message card */
+.documentCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+  max-width: 280px;
+  padding: 4px 0;
+}
+
+.documentIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background-color: rgba(108, 99, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.documentInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.documentName {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.documentSize {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* Download button */
+.downloadBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background-color: rgba(108, 99, 255, 0.15);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.downloadBtn:hover {
+  background-color: var(--primary);
+  color: var(--surface);
+  transform: translateY(-1px);
+}
+
+/* Message deletion dropdown menu options */
+.optionsWrapper {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.bubbleCard:hover .optionsWrapper {
+  opacity: 1;
+}
+
+.optionsBtn {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+.optionsBtn:hover {
+  color: var(--primary);
+  background-color: var(--surface-hover);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  width: 160px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  box-shadow: var(--shadow-md);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 20;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  font-size: 12px;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  text-align: left;
+  transition: var(--transition-fast);
+  width: 100%;
+}
+
+.dropdownItem:hover {
+  background-color: var(--surface-hover);
+}
+
+.dropdownItem.danger {
+  color: var(--accent);
+}
+
+.dropdownItem.danger:hover {
+  background-color: rgba(255, 143, 163, 0.1);
+}
+
+

@@ -1,0 +1,72 @@
+:root {
+  /* Warm Premium Color Palette */
+  --primary: #6C63FF;
+  --primary-light: #857eff;
+  --primary-dark: #534bc4;
+  --primary-glow: rgba(108, 99, 255, 0.15);
+  
+  --accent: #FF8FA3;
+  --accent-light: #ffa6b7;
+  
+  --secondary: #F4B942;
+  --success: #55C57A;
+  --success-glow: rgba(85, 197, 122, 0.15);
+  
+  --background: #FFF8F5;
+  --surface: #FFFFFF;
+  --surface-hover: #FFF1EC;
+  --surface-active: #FFE4DC;
+  
+  --text: #2E2E2E;
+  --text-muted: #7A7A7A;
+  --text-light: #A5A5A5;
+  
+  --border: #F7EAE5;
+  --border-focus: #FFD4C8;
+  
+  /* Glassmorphism Styles */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px 0 rgba(108, 99, 255, 0.04);
+  --glass-blur: blur(12px);
+
+  /* Layout and Sizing */
+  --sidebar-width: 360px;
+  --header-height: 70px;
+  --input-height: 50px;
+  
+  /* Border Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(108, 99, 255, 0.03);
+  --shadow-md: 0 8px 24px rgba(108, 99, 255, 0.06);
+  --shadow-lg: 0 16px 40px rgba(108, 99, 255, 0.1);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+
+  /* Transitions */
+  --transition-fast: all 0.15s ease;
+  --transition-normal: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode (Optional structure, built for extensibility) */
+[data-theme="dark"] {
+  --background: #18161D;
+  --surface: #211E26;
+  --surface-hover: #2B2833;
+  --surface-active: #35323F;
+  --text: #F3EFF5;
+  --text-muted: #9E99A6;
+  --text-light: #6D6875;
+  --border: #2D2A33;
+  --border-focus: #4F4B5C;
+  --glass-bg: rgba(33, 30, 38, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}

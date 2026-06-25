@@ -1,0 +1,127 @@
+.recorderContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  width: 100%;
+  animation: fadeInScale 0.2s ease forwards;
+}
+
+.recordingState {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  flex: 1;
+}
+
+.pulseDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+.durationText {
+  font-family: monospace;
+  font-size: 14px;
+  color: var(--text);
+  margin-left: 4px;
+}
+
+.previewPlayer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actionBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--background);
+  color: var(--text-muted);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.actionBtn:hover {
+  background-color: var(--surface-hover);
+  color: var(--text);
+}
+
+.actionBtnDanger {
+  color: var(--accent);
+}
+
+.actionBtnDanger:hover {
+  background-color: rgba(255, 143, 163, 0.1);
+  color: var(--accent);
+}
+
+.actionBtnSuccess {
+  background-color: var(--primary);
+  color: var(--surface);
+}
+
+.actionBtnSuccess:hover {
+  background-color: var(--primary-light);
+  color: var(--surface);
+}
+
+/* Simulated Waveform */
+.waveformSim {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 20px;
+  flex: 1;
+  max-width: 140px;
+  padding: 0 10px;
+}
+
+.waveBar {
+  flex: 1;
+  height: 4px;
+  background-color: var(--accent);
+  border-radius: var(--radius-full);
+}
+
+.waveBar:nth-child(2n) {
+  height: 12px;
+  animation: wavePulse 0.6s infinite ease-in-out alternate;
+}
+.waveBar:nth-child(3n) {
+  height: 16px;
+  animation: wavePulse2 0.8s infinite ease-in-out alternate;
+}
+.waveBar:nth-child(4n) {
+  height: 8px;
+  animation: wavePulse 0.5s infinite ease-in-out alternate;
+}
+
+@keyframes wavePulse {
+  from { height: 4px; }
+  to { height: 16px; }
+}
+
+@keyframes wavePulse2 {
+  from { height: 6px; }
+  to { height: 20px; }
+}

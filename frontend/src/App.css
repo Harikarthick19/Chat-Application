@@ -1,0 +1,64 @@
+.appContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background-color: var(--background);
+}
+
+.chatLayout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.loadingScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background);
+  gap: 16px;
+  color: var(--text-muted);
+}
+
+.loadingSpinner {
+  color: var(--primary);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  /* On mobile viewport, stack screens horizontally and slide them */
+  .chatLayout > div:first-child {
+    width: 100% !important;
+    display: flex !important;
+  }
+  
+  .chatLayout > div:last-child {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 100;
+    transform: translateX(100%);
+    transition: transform 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+
+  .chatLayout.has-active-chat > div:first-child {
+    display: none !important;
+  }
+
+  .chatLayout.has-active-chat > div:last-child {
+    transform: translateX(0);
+  }
+}
+
