@@ -73,6 +73,17 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'API is running' });
 });
 
+// Database diagnostics endpoint
+import pool from './config/db';
+app.get('/api/db-check', async (req, res) => {
+  try {
+    const dbRes = await pool.query('SELECT NOW()');
+    res.status(200).json({ status: 'ok', time: dbRes.rows[0].now });
+  } catch (err: any) {
+    res.status(500).json({ status: 'error', error: err.message, stack: err.stack });
+  }
+});
+
 // Always serve the React frontend build (production on Render)
 const frontendDist = path.join(__dirname, '../../frontend/dist');
 if (fs.existsSync(frontendDist)) {

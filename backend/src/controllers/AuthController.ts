@@ -7,8 +7,12 @@ export class AuthController {
   static async register(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { username, email, password } = req.body;
-      const ip = req.ip || (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress;
-      const result = await AuthService.register(username, email, password, ip);
+      let ip = req.ip || (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || '';
+      if (ip.includes(',')) {
+        ip = ip.split(',')[0].trim();
+      }
+      const safeIp = ip.substring(0, 45);
+      const result = await AuthService.register(username, email, password, safeIp);
       res.status(201).json(result);
     } catch (err: any) {
       res.status(400).json({ error: err.message });
