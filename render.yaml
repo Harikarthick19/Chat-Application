@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: chat-application
+    runtime: node
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        value: chat_app_jwt_secret_key_extremely_secure_2026_xyz
+      - key: JWT_EXPIRATION
+        value: 7d
+      - key: DATABASE_URL
+        fromDatabase:
+          name: chat-app-db
+          property: connectionString
+
+databases:
+  - name: chat-app-db
+    databaseName: chatapp
+    user: chatapp_user
+    plan: free
