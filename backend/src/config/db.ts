@@ -3,13 +3,19 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD || undefined,
-  port: parseInt(process.env.DB_PORT || '5432'),
-});
+// Railway provides DATABASE_URL; fall back to individual vars for local dev
+const pool = process.env.DATABASE_URL
+  ? new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false }, // required for Railway PostgreSQL
+    })
+  : new Pool({
+      user: process.env.DB_USER,
+      host: process.env.DB_HOST,
+      database: process.env.DB_DATABASE,
+      password: process.env.DB_PASSWORD || undefined,
+      port: parseInt(process.env.DB_PORT || '5432'),
+    });
 
 pool.on('error', (err) => {
   console.error('Unexpected error on idle pg client', err);

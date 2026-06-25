@@ -30,8 +30,13 @@ export const SocketProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       return;
     }
 
-    const HOSTNAME = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
-    const newSocket = io(`http://${HOSTNAME}:5001`, {
+    // In production (Railway): VITE_SOCKET_URL='' → connects to same origin
+    // In development: falls back to dynamic localhost:5001
+    const SOCKET_URL = import.meta.env.VITE_SOCKET_URL !== undefined
+      ? import.meta.env.VITE_SOCKET_URL   // could be '' (same origin) or a full URL
+      : `http://${window.location.hostname}:5001`;
+
+    const newSocket = io(SOCKET_URL || undefined, {
       auth: { token },
       transports: ['websocket'],
     });

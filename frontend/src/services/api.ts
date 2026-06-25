@@ -1,5 +1,7 @@
-const HOSTNAME = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
-const BASE_URL = `http://${HOSTNAME}:5001/api`;
+// In production (Railway): VITE_API_URL=/api  (same-origin, no port needed)
+// In development: falls back to dynamic local backend
+const BASE_URL = import.meta.env.VITE_API_URL ||
+  `http://${typeof window !== 'undefined' ? window.location.hostname : 'localhost'}:5001/api`;
 
 const getHeaders = () => {
   const token = localStorage.getItem('token');

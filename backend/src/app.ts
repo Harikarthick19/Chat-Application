@@ -65,9 +65,23 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/upload', uploadRoutes);
 
 // Health check endpoint
-app.get('/', (req, res) => {
+app.get('/health', (req, res) => {
   res.status(200).json({ status: 'API is running' });
 });
+
+// In production, serve the React frontend build
+if (process.env.NODE_ENV === 'production') {
+  const frontendDist = path.join(__dirname, '../../frontend/dist');
+  app.use(express.static(frontendDist));
+  // Any non-API route returns the React app (SPA routing)
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.status(200).json({ status: 'API is running' });
+  });
+}
 
 // Centralized error boundary
 app.use(errorHandler);

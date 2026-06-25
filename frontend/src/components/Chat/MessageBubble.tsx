@@ -6,8 +6,11 @@ import { VoicePlayer } from './VoicePlayer';
 import { ImageModal } from './ImageModal';
 import { api } from '../../services/api';
 
-const HOSTNAME = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
-const BACKEND_ORIGIN = `http://${HOSTNAME}:5001`;
+// In production (Railway): VITE_BACKEND_ORIGIN='' → relative paths served by same origin
+// In development: falls back to dynamic localhost:5001
+const BACKEND_ORIGIN = import.meta.env.VITE_BACKEND_ORIGIN !== undefined
+  ? import.meta.env.VITE_BACKEND_ORIGIN
+  : `http://${typeof window !== 'undefined' ? window.location.hostname : 'localhost'}:5001`;
 
 interface MessageBubbleProps {
   message: Message;
