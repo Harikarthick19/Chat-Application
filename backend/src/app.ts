@@ -80,7 +80,19 @@ app.get('/api/db-check', async (req, res) => {
     const dbRes = await pool.query('SELECT NOW()');
     res.status(200).json({ status: 'ok', time: dbRes.rows[0].now });
   } catch (err: any) {
-    res.status(500).json({ status: 'error', error: err.message, stack: err.stack });
+    res.status(500).json({
+      status: 'error',
+      error: err.message,
+      stack: err.stack,
+      diagnostics: {
+        hasDatabaseUrl: !!process.env.DATABASE_URL,
+        databaseUrlLength: process.env.DATABASE_URL ? process.env.DATABASE_URL.length : 0,
+        dbHost: process.env.DB_HOST,
+        dbUser: process.env.DB_USER,
+        dbName: process.env.DB_DATABASE,
+        dbPort: process.env.DB_PORT,
+      }
+    });
   }
 });
 
